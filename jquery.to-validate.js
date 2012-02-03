@@ -11,22 +11,11 @@ function ToValidate(options){
 ToValidate.prototype = {
 	init: function(){
 		this._rule_name = null;
-		this.initType();
-	},
-
-	initType: function(){
-		if(this.$dom.data('textboxlist_ref')){
-			this._type = 'textboxlist';
-		}
-		else {
-			this._type = 'default';
-		}
 	},
 
 	val: function(){
 		return this.$dom.val();
 	},
-
 
 	hasValidationRuleName: function(){
 		return !!this.getValidationRuleName();
@@ -87,12 +76,7 @@ ToValidate.prototype = {
 		// maybe we should think about initializing the focus target only once ( on init )
 		var $focus_target;
 		if(this.$dom.is(':input')){
-			if(this._type == 'textboxlist'){
-				$focus_target = this.$dom.data('textboxlist_ref').getContainer();
-			}
-			else {
-				$focus_target = this.$dom.first();
-			}
+			$focus_target = this.$dom.first();
 		}
 		else {
 			$focus_target = this.$dom.find(':input:first');
