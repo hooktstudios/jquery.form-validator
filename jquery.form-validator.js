@@ -109,18 +109,6 @@ FormValidator.prototype = {
 		this.errors.push(error);
 	},
 
-	addErrorIfFieldIsValid: function(new_error){
-		var found = false;
-		$.each(this.errors, function(i, error){
-			if(error.getFocusTarget()[0] === new_error.getFocusTarget()[0]){
-				found = true;
-				return false;
-			}
-		});
-
-		if(!found) this.errors.push(new_error);
-	},
-
 	setErrors: function(errors){
 		this.errors = errors;
 	},
