@@ -59,7 +59,7 @@ ToValidate.prototype = {
 				label = $label_in_placeholder;
 			}
 			else {
-				throw $.app._throw('Can\'t find label for ToValidate');
+				throw 'Can\'t find label for ToValidate';
 			}
 		}
 		else {

@@ -5,7 +5,24 @@ function FormValidator(view, $form, options){
 	// Could be overwritten with object options
 	this.defaults = {
 		to_validate_class: 'to-validate',
-		required_class: 'required'
+		required_class: 'required',
+		_app: {
+			_: function(e){
+				return e;
+			},
+			showErrorsSummary: function(e){
+				alert('showing error summary')
+			},
+			gotoError: function(e){
+				alert('going to error X')
+			},
+			validation_rules: {
+
+			},
+			validation_conds: {
+
+			}
+		}
 	};
 
 	$.extend(this, this.defaults, (options) ? options : {});
@@ -49,7 +66,7 @@ FormValidator.prototype = {
 		if(is_empty){
 			// error: required field is empty
 			error = new FormError({
-				msg: $.app._('FIELD_REQUIRED')
+				msg: this._app._('FIELD_REQUIRED')
 			});
 		}
 		else if(to_validate.hasValidationRuleName()){
@@ -92,17 +109,16 @@ FormValidator.prototype = {
 	},
 
 	findValidation: function(type, name){
-		if(!name) throw $.app._throw('No validation passed name');
+		if(!name) throw 'No validation passed name';
 
 		var view_validation = this.view['validation_' + type + 's'][name];
 		if(view_validation) return view_validation;
 
-		var app_validation = $.app['validation_' + type + 's'][name];
+		var app_validation = this._app['validation_' + type + 's'][name];
 		if(app_validation) return app_validation;
 
 		// Rule not found : thats an error
-		throw $.app._throw('No validation ' + type + ' found for ' +
-			type + '_name: ' + name);
+		throw 'No validation ' + type + ' found for ' + type + '_name: ' + name;
 	},
 
 	addError: function(error){
@@ -116,12 +132,12 @@ FormValidator.prototype = {
 	showErrors: function(){
 		if(this.errors.length == 0) return;
 		this.showHintErrors();
-		$.app.showErrorsSummary(this.errors);
+		this._app.showErrorsSummary(this.errors);
 		this.gotoError();
 	},
 
 	gotoError: function(){
-		$.app.gotoError(this._$form.find('.save_warning:first'));
+		this._app.gotoError(this._$form.find('.save_warning:first'));
 	},
 
 	showHintErrors: function(){
