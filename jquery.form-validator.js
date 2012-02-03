@@ -128,7 +128,7 @@ FormValidator.prototype = {
 	showErrors: function(){
 		if(this.errors.length == 0) return;
 		this.showHintErrors();
-		$.app.showErrorsSummary(this.getConvertedErrors());
+		$.app.showErrorsSummary(this.errors);
 		this.gotoError();
 	},
 
@@ -142,22 +142,5 @@ FormValidator.prototype = {
 		$.each(this.errors, function(i, error){
 			error.getFocusTarget().hintError(error.getMessage(), 200, self.errors.length > 0);
 		});
-	},
-
-	getConvertedErrors: function(){
-		// we might remove this function later on and modify $.app.showErrorsSummary fn in order to receive FormError objects
-
-		// convert errors array containing FormError objects to array containing plain objects
-		// eg: [FormError instance, FormError instance, ...] to [{name:X, target:X},{name:X, target:X}, ...]
-		var converted_errors = new Array();
-
-		converted_errors = $.map(this.errors, function(e, i){
-			return {
-				name: e.getLabel(),
-				target: e.getFocusTarget()
-			}
-		});
-
-		return converted_errors;
 	}
 }
