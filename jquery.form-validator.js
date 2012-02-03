@@ -7,19 +7,20 @@ function FormValidator($form, options){
 		required_class: 'required',
 		_app: {
 			_: function(e){
+				// localization fn to be overwritten
 				return e;
 			},
 			showErrorsSummary: function(e){
-				alert('showing error summary')
+				// showErrorSummary: to be implemented
 			},
 			gotoError: function(e){
-				alert('going to error X')
+				// gotoError: to be implemented
 			},
 			validation_rules: {
-
+				// custom validation rules
 			},
 			validation_conds: {
-
+				// custom validation conds (possibility to skip validations)
 			}
 		}
 	};
