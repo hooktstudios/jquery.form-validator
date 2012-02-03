@@ -1,5 +1,4 @@
-function FormValidator(view, $form, options){
-	this.view = view;
+function FormValidator($form, options){
 	this._$form = $form;
 	// Default options
 	// Could be overwritten with object options
@@ -97,8 +96,8 @@ FormValidator.prototype = {
 	},
 
 	execValidationFunction: function(rule_name, input_value){
-		var validation_result = this.findValidation('rule', rule_name)
-			.call(this._view, input_value);
+		var validationFn = this.findValidation('rule', rule_name);
+		var validation_result = validationFn(input_value);
 
 		// Rules return true when valid, error message otherwise
 		if(validation_result === true){
@@ -110,9 +109,6 @@ FormValidator.prototype = {
 
 	findValidation: function(type, name){
 		if(!name) throw 'No validation passed name';
-
-		var view_validation = this.view['validation_' + type + 's'][name];
-		if(view_validation) return view_validation;
 
 		var app_validation = this._app['validation_' + type + 's'][name];
 		if(app_validation) return app_validation;
