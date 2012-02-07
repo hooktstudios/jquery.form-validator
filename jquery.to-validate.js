@@ -1,4 +1,4 @@
-function ToValidate(options){
+function ToValidate(options) {
 	// Default options
 	// Could be overwritten with object options
 	this.defaults = {};
@@ -9,53 +9,53 @@ function ToValidate(options){
 };
 
 ToValidate.prototype = {
-	init: function(){
+	init: function () {
 		this._rule_name = null;
 	},
 
-	val: function(){
+	val: function () {
 		return this.$dom.val();
 	},
 
-	hasValidationRuleName: function(){
+	hasValidationRuleName: function () {
 		return !!this.getValidationRuleName();
 	},
 
-	getValidationRuleName: function(){
-		if(!this._rule_name){
+	getValidationRuleName: function () {
+		if (!this._rule_name) {
 			this._rule_name = this.$dom.data('validation-type');
 		}
 		return this._rule_name;
 	},
 
-	getValidationCondName: function(){
+	getValidationCondName: function () {
 		return this.$dom.data('validation-condition');
 	},
 
-	isRequired: function(){
+	isRequired: function () {
 		return this.$dom.hasClass('required');
 	},
 
-	isEmpty: function(){
+	isEmpty: function () {
 		return ($.trim(this.val()) == '');
 	},
 
-	findLabel: function(){
+	findLabel: function () {
 		var label;
 		var dom_label_data = this.$dom.data('label');
 
-		if(!dom_label_data){
+		if (!dom_label_data) {
 			var $label_in_input_wrapper = this.$dom.parents('.input').find('label');
 			var $label_in_item_wrapper = this.$dom.parents('.item').find('label');
 			var $label_in_placeholder = this.$dom.attr('placeholder');
 
-			if($label_in_input_wrapper.length > 0){
+			if ($label_in_input_wrapper.length > 0) {
 				label = $label_in_input_wrapper.text();
 			}
-			else if($label_in_item_wrapper.length > 0){
+			else if ($label_in_item_wrapper.length > 0) {
 				label = $label_in_item_wrapper.text();
 			}
-			else if($label_in_placeholder){
+			else if ($label_in_placeholder) {
 				label = $label_in_placeholder;
 			}
 			else {
@@ -69,13 +69,13 @@ ToValidate.prototype = {
 		return label;
 	},
 
-	findFocusTarget: function(){
+	findFocusTarget: function () {
 		// @TODO: Short-circuit logic
 			// 1 find target with specific class (i.e. .focus-target (TBD))
 			// 2 first input
 		// maybe we should think about initializing the focus target only once ( on init )
 		var $focus_target;
-		if(this.$dom.is(':input')){
+		if (this.$dom.is(':input')) {
 			$focus_target = this.$dom.first();
 		}
 		else {

@@ -1,4 +1,4 @@
-function FormError(options){
+function FormError(options) {
 	// Default options
 	// Could be overwritten with object options
 	this.defaults = {};
@@ -9,31 +9,31 @@ function FormError(options){
 };
 
 FormError.prototype = {
-	init: function(){
+	init: function () {
 
 	},
 
-	setMessage: function(msg){
+	setMessage: function (msg) {
 		this.msg = msg;
 	},
 
-	getMessage: function(){
+	getMessage: function () {
 		return this.msg;
 	},
 
-	setLabel: function(label){
+	setLabel: function (label) {
 		this.label = label;
 	},
 
-	getLabel: function(){
+	getLabel: function () {
 		return this.label;
 	},
 
-	setFocusTarget: function(target){
+	setFocusTarget: function (target) {
 		this.focus_target = target;
 	},
 
-	getFocusTarget: function(){
+	getFocusTarget: function () {
 		return this.focus_target;
 	}
 }
